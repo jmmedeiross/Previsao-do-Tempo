@@ -1,0 +1,13 @@
+{
+  "name": "previsao-do-tempo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aplicação de clima com chave mantida no servidor",
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}
