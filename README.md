@@ -1,5 +1,7 @@
 # Previsão do Tempo
 
+[Acessar aplicação publicada](https://previsao-do-tempo-jmmedeiross.onrender.com/)
+
 Aplicação em HTML, CSS e JavaScript para consultar temperatura, condição do tempo e umidade por cidade. O servidor Node.js usa a busca de localidades e os dados atuais do Open-Meteo, sem chave de API.
 
 ## Executar
@@ -11,6 +13,8 @@ npm start
 ```
 
 Abra `http://localhost:3000`. Nenhum cadastro ou arquivo `.env` é necessário. A porta pode ser definida por `PORT`.
+
+Os links antigos do GitHub Pages redirecionam para o serviço no Render.
 
 ## Publicar no Render
 
