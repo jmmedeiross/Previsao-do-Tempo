@@ -2,12 +2,12 @@
   "name": "previsao-do-tempo",
   "version": "1.0.0",
   "private": true,
-  "description": "Aplicação de clima com chave mantida no servidor",
+  "description": "Aplicação de clima com Node.js e Open-Meteo, sem chave de API",
   "scripts": {
-    "start": "node --env-file=.env server.js",
+    "start": "node server.js",
     "test": "node --test"
   },
   "engines": {
-    "node": ">=20.6"
+    "node": ">=20.6 <25"
   }
 }

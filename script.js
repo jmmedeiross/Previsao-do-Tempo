@@ -3,8 +3,9 @@ function colocarDadosNaTela(dados) {
   document.querySelector(".temp").textContent = Math.floor(dados.main.temp) + "°C";
   document.querySelector(".texto-previsao").textContent = dados.weather[0].description;
   document.querySelector(".umidade").textContent = "Umidade: " + dados.main.humidity + "%";
-  document.querySelector(".img-previsao").src =
-    "https://openweathermap.org/img/wn/" + encodeURIComponent(dados.weather[0].icon) + ".png";
+  const icon = document.querySelector(".img-previsao");
+  icon.textContent = dados.weather[0].icon;
+  icon.setAttribute("aria-label", dados.weather[0].description);
 }
 let requestVersion = 0;
 async function buscarCidade(cidade) {
@@ -32,3 +33,4 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.key === "Enter") cliqueiNoBotao();
   });
 });
+
