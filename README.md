@@ -1,38 +1,52 @@
 # Previsão do Tempo
 
-Aplicação em HTML, CSS e JavaScript para buscar temperatura, descrição e umidade por cidade. Um servidor Node.js consulta o OpenWeather sem enviar a chave ao navegador.
+Aplicação em HTML, CSS e JavaScript para consultar temperatura, condição do tempo e umidade por cidade. O servidor Node.js usa a busca de localidades e os dados atuais do Open-Meteo, sem chave de API.
 
 ## Executar
 
 Requer Node.js 20.6 ou superior.
 
-1. Copie `.env.example` para `.env`.
-2. Preencha `OPENWEATHER_API_KEY` com uma chave nova.
-3. Execute `npm start` e abra `http://localhost:3000`.
+```bash
+npm start
+```
 
-A aplicação agora exige o servidor Node.js. Para publicar, use uma hospedagem que execute Node e configure a chave como variável de ambiente; GitHub Pages sozinho não executa esse servidor.
+Abra `http://localhost:3000`. Nenhum cadastro ou arquivo `.env` é necessário. A porta pode ser definida por `PORT`.
 
 ## Publicar no Render
 
-O arquivo `render.yaml` prepara um serviço Node.js no plano Free. A chave não fica no repositório: o Render solicita `OPENWEATHER_API_KEY` durante a criação do serviço.
+O arquivo `render.yaml` prepara um serviço Node.js no plano Free. Use **New > Blueprint**, selecione este repositório e confira o plano Free antes de publicar.
 
-1. Revogue a chave antiga e gere uma chave nova no OpenWeather.
-2. Acesse o [Render](https://dashboard.render.com/) e escolha **New > Blueprint**.
-3. Selecione este repositório e a branch `main`.
-4. Confira o plano **Free** e informe a nova chave no campo privado `OPENWEATHER_API_KEY`.
-5. Após o deploy, abra a URL criada pelo Render e faça uma busca por cidade.
+Para criação manual de um Web Service, use:
 
-A configuração usa `node server.js` para iniciar e `/api/health` para verificar o servidor. A porta é fornecida automaticamente pelo Render. Não é necessário criar um arquivo `.env` na hospedagem.
+| Campo | Valor |
+|---|---|
+| Language | Node |
+| Build Command | `npm install --ignore-scripts` |
+| Start Command | `node server.js` |
+| Health Check Path | `/api/health` |
+| Compute | Free |
 
-O plano Free pode suspender o serviço após inatividade e levar algum tempo para responder na próxima visita. Confira os limites na [documentação do Render](https://render.com/docs/free).
+Não configure `OPENWEATHER_API_KEY`: ela não é utilizada. A porta é fornecida pelo Render. O plano gratuito pode suspender o serviço após inatividade; consulte os [limites do Render](https://render.com/docs/free).
 
-## Segurança
+## Dados e limitações
 
-A chave anteriormente publicada precisa ser revogada no OpenWeather. A remoção do código atual não elimina a chave do histórico do Git. `.env` não deve ser versionado.
+- [Open-Meteo](https://open-meteo.com/en/docs): condições atuais estimadas por modelos meteorológicos, não necessariamente medições de uma estação local.
+- [GeoNames](https://www.geonames.org/): base das localidades retornadas pela busca.
+- A aplicação usa o primeiro resultado para o nome da cidade. Nomes iguais em diferentes regiões podem retornar uma localidade diferente da desejada.
+- Respostas de clima são guardadas por cinco minutos em memória, com limite de 200 cidades.
+- A API gratuita do Open-Meteo destina-se a uso não comercial, adequado a este portfólio. Confira [condições e limites](https://open-meteo.com/en/pricing) antes de uso comercial.
 
 ## Testes
 
-Execute `npm test`. Os testes cobrem consulta, cidade inexistente, configuração ausente e falhas da fonte usando respostas simuladas, sem consumir a API real.
+```bash
+npm test
+```
+
+Oito testes verificam busca, tradução dos códigos de tempo, dados ausentes, cache e falhas da fonte sem depender da API real. O GitHub Actions executa a suíte automaticamente.
+
+## Segurança
+
+A aplicação não usa mais a chave OpenWeather anteriormente publicada. Essa chave continua no histórico do Git; sua revogação no serviço continua recomendada.
 
 ## Autor
 
