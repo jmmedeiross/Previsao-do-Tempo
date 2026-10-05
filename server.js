@@ -10,6 +10,7 @@ function createServer({ apiKey = process.env.OPENWEATHER_API_KEY, fetchImpl = fe
     };
     try {
       const url = new URL(req.url, 'http://localhost');
+      if (url.pathname === '/api/health') return send(200, { ok: true });
       if (url.pathname === '/api/weather') {
         const city = (url.searchParams.get('city') || '').trim();
         if (!city || city.length > 120) return send(400, { error: 'Informe uma cidade válida.' });

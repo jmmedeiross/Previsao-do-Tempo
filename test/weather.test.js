@@ -1,6 +1,11 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { createServer } = require('../server');
+test('saúde do servidor não depende de chave nem da fonte externa', async () => {
+ const result = await query({ apiKey: '', fetchImpl: () => { throw new Error('Não deveria consultar'); } }, '/api/health');
+ assert.equal(result.status, 200);
+ assert.deepEqual(result.data, { ok: true });
+});
 async function query(options, route = '/api/weather?city=São%20Paulo') {
  const server = createServer(options);
  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
@@ -28,3 +33,4 @@ test('cidade inexistente e falha externa', async () => {
  const r = await query({ apiKey: 'key', fetchImpl: async () => { throw new Error('URL com chave privada'); } });
  assert.equal(r.status, 502); assert.ok(!JSON.stringify(r.data).includes('privada'));
 });
+
