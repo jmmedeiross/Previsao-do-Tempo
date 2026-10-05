@@ -10,12 +10,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <title>Previsão do Tempo</title>
   </head>
   <body>
     <div class="caixa-maior">
-      <input class="input-cidade" placeholder="Digite o nome da cidade" />
+      <input aria-label="Cidade" class="input-cidade" placeholder="Digite o nome da cidade" />
       <button class="botao-busca" onclick="cliqueiNoBotao()">
         <img
           class="img-busca"
@@ -23,20 +23,19 @@
           alt="busca"
         />
       </button>
+      <p id="status" role="status" aria-live="polite">Busque uma cidade para consultar o clima.</p>
       <div class="caixa-media">
-        <h2 class="temp-cidade">Tempo em São Paulo</h2>
+        <h2 class="temp-cidade">Previsão do tempo</h2>
 
-        <p class="temp">21°C</p>
+        <p class="temp">—</p>
         <div class="caixa-menor">
-          <img
-            class="img-previsao"
-            src="https://openweathermap.org/img/wn/04n.png"
-            alt="icone-info-tempo"
-          />
-          <p class="texto-previsao">Nublado</p>
+          <span class="img-previsao" role="img" aria-label="Condição do tempo">☁️</span>
+          <p class="texto-previsao">—</p>
         </div>
       </div>
-      <p class="umidade">Umidade: 76%</p>
+      <p class="umidade">Umidade: —</p>
+      <p class="fonte">Dados: <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · Localização: <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a></p>
     </div>
   </body>
 </html>
+

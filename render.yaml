@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: previsao-do-tempo-jmmedeiross
+    runtime: node
+    plan: free
+    buildCommand: npm install --ignore-scripts
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production

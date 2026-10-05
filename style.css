@@ -78,3 +78,7 @@ body {
     color: white;
     margin-top: 20px;
 }
+.img-previsao { font-size: 32px; line-height: 1; }
+.fonte { margin-top: 20px; font-size: 11px; line-height: 1.5; color: #ccc; }
+.fonte a { color: inherit; }
+#status { color: #ddd; font-size: 13px; margin-top: 14px; }
